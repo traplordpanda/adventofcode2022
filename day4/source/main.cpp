@@ -23,17 +23,17 @@ struct interval {
     return in;
   }
   auto is_between(interval &second) -> bool {
-    if ((min >= second.min && max <= second.max) ||
-        (second.min >= min && second.max <= max)) {
+    if ((this->min >= second.min && this->max <= second.max) ||
+        (second.min >= this->min && second.max <= this->max)) {
       return true;
     }
     return false;
   }
   auto overlap(interval &second) -> bool {
-    if ((min >= second.min && min <= second.max) ||
-        (max <= second.max && max >= second.min) ||
-        (second.min >= min && second.min <= max) ||
-        (second.max <= max && second.max >= min)) {
+    if ((this->min >= second.min && this->min <= second.max) ||
+        (this->max <= second.max && this->max >= second.min) ||
+        (second.min >= this->min && second.min <= this->max) ||
+        (second.max <= this->max && second.max >= this->min)) {
       return true;
     }
     return false;
