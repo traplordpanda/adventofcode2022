@@ -44,6 +44,6 @@ int main() {
   }
 
   fmt::print("Total in between {}\n", total_between);
-  fmt::print("Total in between {}\n", total_overlap);
+  fmt::print("Total in overlaps{}\n", total_overlap);
   return 0;
 }
