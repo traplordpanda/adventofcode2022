@@ -29,20 +29,34 @@ struct interval {
     }
     return false;
   }
+  auto overlap(interval &second) -> bool {
+    if ((min >= second.min && min <= second.max) ||
+        (max <= second.max && max >= second.min) ||
+        (second.min >= min && second.min <= max) ||
+        (second.max <= max && second.max >= min)) {
+      return true;
+    }
+    return false;
+  }
 };
 
 int main() {
-  int total = 0;
+  int total_between = 0;
+  int total_overlap = 0;
   char temp;
   interval first, second;
   std::fstream in("resources/input.txt");
   while (in) {
     in >> first >> temp >> second;
     if (first.is_between(second)) {
-      total++;
+      total_between++;
+    }
+    if (first.overlap(second)) {
+      total_overlap++;
     }
   }
 
-  fmt::print("Total in between {}\n", total);
+  fmt::print("Total in between {}\n", total_between);
+  fmt::print("Total in between {}\n", total_overlap);
   return 0;
 }
