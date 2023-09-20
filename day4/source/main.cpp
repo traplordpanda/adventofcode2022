@@ -23,17 +23,14 @@ struct interval {
     return in;
   }
   auto is_between(interval &second) -> bool {
-    if ((this->min >= second.min && this->max <= second.max) ||
-        (second.min >= this->min && second.max <= this->max)) {
+    if ((this->min >= second.min && this->max <= second.max)) {
       return true;
     }
     return false;
   }
-  auto overlap(interval &second) -> bool {
+  auto overlaps(interval &second) -> bool {
     if ((this->min >= second.min && this->min <= second.max) ||
-        (this->max <= second.max && this->max >= second.min) ||
-        (second.min >= this->min && second.min <= this->max) ||
-        (second.max <= this->max && second.max >= this->min)) {
+        (this->max <= second.max && this->max >= second.min)) {
       return true;
     }
     return false;
@@ -48,10 +45,10 @@ int main() {
   std::fstream in("resources/input.txt");
   while (in) {
     in >> first >> temp >> second;
-    if (first.is_between(second)) {
+    if (first.is_between(second) || second.is_between(first)) {
       total_between++;
     }
-    if (first.overlap(second)) {
+    if (first.overlaps(second) || second.overlaps(first)) {
       total_overlap++;
     }
   }
